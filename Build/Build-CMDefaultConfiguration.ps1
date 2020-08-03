@@ -335,7 +335,7 @@ param
 			
                 Write-Output "    + Collection '$collectionName' (limited to '$limitingCollection')."
 
-                if($Schedules.ContainsKey($CollectionInfo.schedule))
+                if(($null -ne $CollectionInfo.schedule) -and ($Schedules.ContainsKey($CollectionInfo.schedule)))
 				{
 					if($CollectionInfo.incremental -eq 'yes')
 					{
@@ -367,6 +367,7 @@ param
 					$collection = New-CMDeviceCollection -Name $collectionName `
                         -LimitingCollectionId $limitingCollectionID `
                         -RefreshType $refreshType `
+                        -Comment $collectionComment `
                         -WhatIf:$WhatIf
 				}
 
